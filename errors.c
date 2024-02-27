@@ -8,16 +8,12 @@
 - invalid char (letter or ,.-/etc) : error 
 1/5 done */
 
-void	argc_check (int argc)
-{
-	if (argc == 1)
-        exit (EXIT_FAILURE);
-}
+
 
 int	check_args(int argc, char **argv)
 {
-
-}
+	return (0);
+}	
 
 
 int	check_duplicates()
@@ -25,4 +21,5 @@ int	check_duplicates()
 	
 		write (1, "Error/n", 8);
 		exit (EXIT_FAILURE);
+	return (0);
 }
