@@ -19,6 +19,7 @@ int	check_args(int argc, char **argv)
 
 }
 
+
 int	check_duplicates()
 {
 	
