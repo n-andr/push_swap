@@ -2,10 +2,11 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/Natalia/Documents/Learn/42/42 core/push_swap/push_swap'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _argc_check, symObjAddr: 0x0, symBinAddr: 0x100003D74, symSize: 0x38 }
-  - { offsetInCU: 0x7D, offset: 0x7D, size: 0x8, addend: 0x0, symName: _argc_check, symObjAddr: 0x0, symBinAddr: 0x100003D74, symSize: 0x38 }
-  - { offsetInCU: 0xA1, offset: 0xA1, size: 0x8, addend: 0x0, symName: _ft_lstadd_front, symObjAddr: 0x38, symBinAddr: 0x100003DAC, symSize: 0x60 }
-  - { offsetInCU: 0xD3, offset: 0xD3, size: 0x8, addend: 0x0, symName: _ft_lstnew, symObjAddr: 0x98, symBinAddr: 0x100003E0C, symSize: 0x68 }
-  - { offsetInCU: 0x109, offset: 0x109, size: 0x8, addend: 0x0, symName: _fill_stack, symObjAddr: 0x100, symBinAddr: 0x100003E74, symSize: 0x70 }
-  - { offsetInCU: 0x157, offset: 0x157, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x170, symBinAddr: 0x100003EE4, symSize: 0x94 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _argc_check, symObjAddr: 0x0, symBinAddr: 0x100003BAC, symSize: 0x38 }
+  - { offsetInCU: 0x7F, offset: 0x7F, size: 0x8, addend: 0x0, symName: _argc_check, symObjAddr: 0x0, symBinAddr: 0x100003BAC, symSize: 0x38 }
+  - { offsetInCU: 0xA3, offset: 0xA3, size: 0x8, addend: 0x0, symName: _char_to_numbers, symObjAddr: 0x38, symBinAddr: 0x100003BE4, symSize: 0x1B0 }
+  - { offsetInCU: 0xF5, offset: 0xF5, size: 0x8, addend: 0x0, symName: _ft_lstadd_front, symObjAddr: 0x1E8, symBinAddr: 0x100003D94, symSize: 0x60 }
+  - { offsetInCU: 0x127, offset: 0x127, size: 0x8, addend: 0x0, symName: _ft_lstnew, symObjAddr: 0x248, symBinAddr: 0x100003DF4, symSize: 0x6C }
+  - { offsetInCU: 0x15D, offset: 0x15D, size: 0x8, addend: 0x0, symName: _fill_stack, symObjAddr: 0x2B4, symBinAddr: 0x100003E60, symSize: 0x70 }
+  - { offsetInCU: 0x1AB, offset: 0x1AB, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x324, symBinAddr: 0x100003ED0, symSize: 0xA0 }
 ...
