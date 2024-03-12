@@ -8,8 +8,6 @@
 
 # include <stdio.h> // remove
 
-// *value type change to int 
-
 typedef struct s_stack
 {
 	int	value; 

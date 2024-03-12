@@ -19,7 +19,5 @@ int	check_args(int argc, char **argv)
 int	check_duplicates()
 {
 	
-		write (1, "Error/n", 8);
-		exit (EXIT_FAILURE);
 	return (0);
 }
