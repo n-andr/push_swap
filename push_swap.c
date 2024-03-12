@@ -194,7 +194,7 @@ int	main(int argc, char **argv)
 	argc_check(argc);
 	
 	a = fill_stack((argc), (argv));
-	printf("%d\n", ft_lstsize(a));
+	printf("list size:%d\n", ft_lstsize(a));
 	if (ft_lstsize(a) == 2)
 		sort_2(a);
 	else if (ft_lstsize(a) == 3)
