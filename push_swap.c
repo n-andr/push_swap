@@ -118,8 +118,9 @@ void sort_3(t_stack *stack)
 	}
 
 
-	//fix this
-	
+	//fix this 
+	//use calloc everywhere
+
 	// if ((a > b) && (a < c) && (b < c))
 	// {
 	// 	stack->value = b;
