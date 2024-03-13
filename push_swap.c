@@ -86,12 +86,30 @@ void sort_3(t_stack *stack)
 	a = stack->value;
 	b = stack->next->value;
 	c = stack->next->next->value;
-	
-	// if ((a > b) && (a > c))
+	if (a > b)
+	{
+		if (a > c)
+			write(1, "sa\nrra\n", 6);
+		else if (a < c)
+			write(1, "ra\n", 3);
+		else
+			write(1, "sa\n", 3);
+	}
+	else // a < b
+	{
+		if (b < c)
+			write(1, "\n", 1); //remove
+		else if (b > c)
+			write(1, "ra\nsa\nrra\n", 10);
+		else
+			write(1, "rra\n", 4);
+	}
+	// if need to save lines: (needs corrections)
+	// if ((a > b) && (a > c) && (b > c))
 	// 	write(1, "sa\nrra\n", 6);
-	// if ((a > b) && (a < c))
+	// if ((a > b) && (a < c) && (b < c))
 	// 	write(1, "ra\n", 3);
-	// if ((a > b) && (b < c))
+	// if ((a > b) && (b < c) && (a < c))
 	// 	write(1, "sa\n", 3);
 	// if ((a < b) && (a > c))
 	// 	write(1, "rra\n", 4);
@@ -171,10 +189,10 @@ t_stack	*fill_stack(int argc, char **argv)
 	t_stack *a;
 	t_stack *new;
 
+	a = NULL;
 	while (argc > 1)
 	{
 		new = ft_lstnew(char_to_numbers(&a, argv[argc - 1]));
-		printf("c_t_n:%d\n",char_to_numbers(&a, argv[argc - 1]));
 		ft_lstadd_front(&a, new);
 		argc--;
 	}
@@ -194,7 +212,7 @@ int	main(int argc, char **argv)
 	argc_check(argc);
 	
 	a = fill_stack((argc), (argv));
-	printf("list size:%d\n", ft_lstsize(a));
+	//printf("list size:%d\n", ft_lstsize(a));
 	if (ft_lstsize(a) == 2)
 		sort_2(a);
 	else if (ft_lstsize(a) == 3)
