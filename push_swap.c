@@ -74,7 +74,12 @@ void sort_2(t_stack *stack)
 	b = stack->next->value;
 	
 	if ((a > b))
+	{
+		
+		stack->value = b;
+		stack->next->value = a;
 		write(1, "sa\n", 3);
+	}
 }
 
 void sort_3(t_stack *stack)
@@ -86,37 +91,64 @@ void sort_3(t_stack *stack)
 	a = stack->value;
 	b = stack->next->value;
 	c = stack->next->next->value;
-	if (a > b)
+	// if (a > b)
+	// {
+	// 	if (a > c)
+	// 			write(1, "sa\nrra\n", 6);
+	// 	else if (a < c)
+	// 		write(1, "ra\n", 3);
+	// 	else
+	// 		write(1, "sa\n", 3);
+	// }
+	// else // a < b
+	// {
+	// 	if (b < c)
+	// 		write(1, "\n", 1); //remove
+	// 	else if (b > c)
+	// 		write(1, "ra\nsa\nrra\n", 10);
+	// 	else
+	// 		write(1, "rra\n", 4);
+	// }
+	//if need to save lines: (needs corrections)
+	if ((a > b) && (a > c) && (b > c))
 	{
-		if (a > c)
-			write(1, "sa\nrra\n", 6);
-		else if (a < c)
-			write(1, "ra\n", 3);
-		else
-			write(1, "sa\n", 3);
+		stack->value = c;
+		stack->next->next->value = a;
+		write(1, "sa\nrra\n", 7);
 	}
-	else // a < b
-	{
-		if (b < c)
-			write(1, "\n", 1); //remove
-		else if (b > c)
-			write(1, "ra\nsa\nrra\n", 10);
-		else
-			write(1, "rra\n", 4);
-	}
-	// if need to save lines: (needs corrections)
-	// if ((a > b) && (a > c) && (b > c))
-	// 	write(1, "sa\nrra\n", 6);
+
+
+	//fix this
+	
 	// if ((a > b) && (a < c) && (b < c))
+	// {
+	// 	stack->value = b;
+	// 	stack->next->value = a;
 	// 	write(1, "ra\n", 3);
+	// }
 	// if ((a > b) && (b < c) && (a < c))
+	// {
+	// 	stack->value = c;
+	// 	stack->next->next->value = a;
 	// 	write(1, "sa\n", 3);
-	// if ((a < b) && (a > c))
-	// 	write(1, "rra\n", 4);
-	// if ((a < b) && (b < c))
-	// 	write(1, "\n", 1);
-	// if ((a < b) && (b > c))
-	// 	write(1, "ra\nsa\nrra\n", 9);
+	// }
+	if ((a < b) && (a > c) && (b > c))
+	{
+		stack->next->value = a;
+		stack->next->next->value = b;
+		write(1, "rra\n", 4);
+	}
+	// if ((a < b) && (b < c) && (a < c))
+	// {
+		
+	// }
+	if ((a < b) && (b > c) &&(a < c))
+	{
+		stack->value = a;
+		stack->next->value = c;
+		stack->next->next->value = b;
+		write(1, "ra\nsa\nrra\n", 10);
+	}
 }
 
 //
