@@ -1,4 +1,43 @@
 #include "push_swap.h"
+
+//libft
+//
+void	*ft_memset(void *ptr, int value, size_t num)
+{
+	char	*new;
+	size_t	i;
+
+	new = (char *)ptr;
+	i = 0;
+	while (i < num)
+	{
+		new[i] = value;
+		i++;
+	}
+	return (new);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, 0, n);
+}
+
+void	*ft_calloc(size_t n_items, size_t size)
+{
+	size_t	total_size;
+	char	*mem;
+
+	if (n_items != 0 && SIZE_MAX / n_items < size)
+		return (NULL);
+	total_size = n_items * size;
+	mem = malloc(total_size);
+	if (mem == 0)
+		return (NULL);
+	ft_bzero(mem, total_size);
+	return (mem);
+}
+//
+// end libft
 // errorc.c
 //
 
@@ -91,60 +130,40 @@ void sort_3(t_stack *stack)
 	a = stack->value;
 	b = stack->next->value;
 	c = stack->next->next->value;
-	// if (a > b)
-	// {
-	// 	if (a > c)
-	// 			write(1, "sa\nrra\n", 6);
-	// 	else if (a < c)
-	// 		write(1, "ra\n", 3);
-	// 	else
-	// 		write(1, "sa\n", 3);
-	// }
-	// else // a < b
-	// {
-	// 	if (b < c)
-	// 		write(1, "\n", 1); //remove
-	// 	else if (b > c)
-	// 		write(1, "ra\nsa\nrra\n", 10);
-	// 	else
-	// 		write(1, "rra\n", 4);
-	// }
-	//if need to save lines: (needs corrections)
 	if ((a > b) && (a > c) && (b > c))
 	{
 		stack->value = c;
 		stack->next->next->value = a;
 		write(1, "sa\nrra\n", 7);
 	}
-
-
-	//fix this
-	
-	// if ((a > b) && (a < c) && (b < c))
-	// {
-	// 	stack->value = b;
-	// 	stack->next->value = a;
-	// 	write(1, "ra\n", 3);
-	// }
-	// if ((a > b) && (b < c) && (a < c))
-	// {
-	// 	stack->value = c;
-	// 	stack->next->next->value = a;
-	// 	write(1, "sa\n", 3);
-	// }
+	if ((a > b) && (a < c) && (b < c))
+	{
+		stack->value = b;
+		stack->next->value = a;
+		//stack->next->next->value = a;
+		write(1, "sa\n", 3);
+	}
+	if ((a > b) && (b < c) && (a > c))
+	{
+		stack->value = b;
+		stack->next->value = c;
+		stack->next->next->value = a;
+		write(1, "sa\n", 3);
+	}
 	if ((a < b) && (a > c) && (b > c))
 	{
+		stack->value = c;
 		stack->next->value = a;
 		stack->next->next->value = b;
 		write(1, "rra\n", 4);
 	}
 	// if ((a < b) && (b < c) && (a < c))
 	// {
-		
+		//do nothing
 	// }
 	if ((a < b) && (b > c) &&(a < c))
 	{
-		stack->value = a;
+		//stack->value = a;
 		stack->next->value = c;
 		stack->next->next->value = b;
 		write(1, "ra\nsa\nrra\n", 10);
@@ -201,7 +220,9 @@ void	ft_lstadd_front(t_stack **lst, t_stack *new)
 	if (new == NULL || lst == NULL)
 		return ;
 	new->next = *lst;
-	*lst = new;
+	if (*lst != NULL)
+        (*lst)->previous = new; 
+    *lst = new;
 }
 
 t_stack	*ft_lstnew(int content)
@@ -212,6 +233,7 @@ t_stack	*ft_lstnew(int content)
 	if (new == 0)
 		return (NULL);
 	new->value = content;
+	new->previous = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -252,7 +274,15 @@ int	main(int argc, char **argv)
 		sort_3(a);
 	while (a!= NULL)
 	{
-		printf("%d\n", a->value);
+		printf("value: %d\n", a->value);
+		if (a->previous != NULL)
+			printf("- previous value: %d\n", a->previous->value);
+		else
+			printf("- previous value: NULL\n");
+		if (a->next != NULL)
+			printf("- next value: %d\n", a->next->value);
+		else
+			printf("- next value: NULL\n");
 		a = a->next;
 	}
 
