@@ -11,7 +11,7 @@ OBJS:= $(SOURCES:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+#	 ar rc $(NAME) $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
