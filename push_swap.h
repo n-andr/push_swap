@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdint.h>
 // # include "libft/libft.h"
 
 # include <stdio.h> // remove
@@ -17,7 +18,7 @@ typedef struct s_stack
 
 
 void	argc_check (int argc);
-void	free_stack(t_stack **stack);
+void	free_stack(t_stack *stack);
 
 
 #endif

@@ -1,4 +1,24 @@
 #include "push_swap.h"
+// to be deleted
+
+void	print_stack(t_stack *stack)
+{
+	printf("stack:\n");
+	while (stack!= NULL) 
+	{
+		printf("value: %d   ", stack->value);
+		if (stack->previous != NULL)
+			printf("- previous value: %d   ", stack->previous->value);
+		else
+			printf("- previous value: NULL   ");
+		if (stack->next != NULL)
+			printf("- next value: %d\n", stack->next->value);
+		else
+			printf("- next value: NULL\n");
+		stack = stack->next;
+	}
+}
+//end to be deleted
 
 //libft
 //
@@ -50,7 +70,7 @@ void	argc_check (int argc)
 int		write_error(t_stack **stack)
 {
 	write (1, "Error\n", 6);
-	free_stack(stack);
+	free_stack(*stack);
 	exit (EXIT_FAILURE);
 	return (0);
 }
@@ -78,28 +98,68 @@ int	check_for_dup(t_stack **a)
 //
 // end errorc.c
 
-//free
+//free memory
 //
 
-void	free_stack(t_stack **stack)
+void	free_stack(t_stack *stack)
 {
 	t_stack	*tmp;
 	t_stack	*current;
 
-	if (stack == NULL)
+	if (stack == NULL || stack == NULL)
 		return;
-	current = *stack;
+	current = stack;
 	while (current != NULL)
 	{
 		tmp = current->next;
 		free(current);
 		current = tmp;
 	}
-	*stack = NULL;
+	stack = NULL;
 }
 
 //
-// end free
+// end free memory
+
+// moves
+//
+void	pb(t_stack **a, t_stack **b)
+{
+	t_stack	*temp;
+
+	if (*a == NULL)
+		return;
+	temp = *a;
+	*a = (*a)->next;
+	if (*a != NULL)
+		(*a)->previous = NULL;
+	temp->next = *b;
+	if ((*b) != NULL)
+		(*b)->previous = temp;
+	*b = temp;
+	//print_stack(*a);
+	//print_stack(*b);
+	write(1, "pb\n", 3);
+}
+
+void	pa(t_stack *a, t_stack *b) // totaly not working
+{
+	t_stack	*temp;
+
+	if (b == NULL)
+		return;
+	temp = b;
+	b = b->next;
+	if (b != NULL)
+		b->previous = NULL;
+	temp->next = a;
+	if (a != NULL)
+		a->previous = temp;
+	write(1, "pa\n", 3);
+}
+
+//
+// end moves
 
 //sort
 //
@@ -170,6 +230,24 @@ void sort_3(t_stack *stack)
 	}
 }
 
+void	sort_5(t_stack *a)
+{
+	t_stack	*b;
+
+	b = NULL;
+	print_stack(a);
+	pb (&a, &b);
+	pb (&a, &b);
+	pb (&a, &b);
+	print_stack(a);
+	print_stack(b);
+
+	// sort_3(a);
+	// pa (a, b);
+	// pa (a, b);
+	//print_stack(a);
+	//print_stack(b);
+}
 //
 //end sort
 
@@ -229,7 +307,7 @@ t_stack	*ft_lstnew(int content)
 {
 	t_stack	*new;
 
-	new = (t_stack *)malloc(sizeof(t_stack));
+	new = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (new == 0)
 		return (NULL);
 	new->value = content;
@@ -247,6 +325,11 @@ t_stack	*fill_stack(int argc, char **argv)
 	while (argc > 1)
 	{
 		new = ft_lstnew(char_to_numbers(&a, argv[argc - 1]));
+		if (new == NULL)
+        {
+            free_stack(a); // Free memory if allocation fails
+            return NULL;
+        }
 		ft_lstadd_front(&a, new);
 		argc--;
 	}
@@ -254,12 +337,12 @@ t_stack	*fill_stack(int argc, char **argv)
 	return(a);
 }
 
-int	main(int argc, char **argv)
-{
-// int	main()
+// int	main(int argc, char **argv)
 // {
-// 	int argc = 5;
-// 	char *argv[] = {"program_name", "1", "3", "8", "2"};
+int	main()
+{
+	int argc = 6;
+	char *argv[] = {"program_name", "100", "30", "8", "2", "-10"};
 
 	t_stack *a;
 
@@ -270,23 +353,25 @@ int	main(int argc, char **argv)
 	if (ft_lstsize(a) == 2)
 		sort_2(a);
 	else if (ft_lstsize(a) == 3)
-
 		sort_3(a);
-	while (a!= NULL)
-	{
-		printf("value: %d\n", a->value);
-		if (a->previous != NULL)
-			printf("- previous value: %d\n", a->previous->value);
-		else
-			printf("- previous value: NULL\n");
-		if (a->next != NULL)
-			printf("- next value: %d\n", a->next->value);
-		else
-			printf("- next value: NULL\n");
-		a = a->next;
-	}
+	else if (ft_lstsize(a) == 5)
+		sort_5(a);
+	// проблемка, поинтер уходит на последний элемент и большеничего не может освободиться
+	// надо сделать копию или отдать в другую функцию
+	// while (a!= NULL) // {
+	// 	printf("value: %d\n", a->value);
+	// 	if (a->previous != NULL)
+	// 		printf("- previous value: %d\n", a->previous->value);
+	// 	else
+	// 		printf("- previous value: NULL\n");
+	// 	if (a->next != NULL)
+	// 		printf("- next value: %d\n", a->next->value);
+	// 	else
+	// 		printf("- next value: NULL\n");
+	// 	a = a->next;
+	// }
 
-	free_stack(&a);
+	free_stack(a);
 	//free(a); not sure
 	return (0);
 } 
