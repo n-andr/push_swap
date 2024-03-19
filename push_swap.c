@@ -149,7 +149,7 @@ void sort_3(t_stack *stack)
 		stack->value = b;
 		stack->next->value = c;
 		stack->next->next->value = a;
-		write(1, "sa\n", 3);
+		write(1, "ra\n", 3);
 	}
 	if ((a < b) && (a > c) && (b > c))
 	{
@@ -171,26 +171,31 @@ void sort_3(t_stack *stack)
 	}
 }
 
-void	sort_5(t_stack *a)
+void	sort_5(t_stack **a)
 {
 	t_stack	*b;
 
 	b = NULL;
-	pb (&a, &b);
-	pb (&a, &b);
-	sort_3(a);
-	print_stack("a", a);
+	while (ft_lstsize(*a) > 3)
+		pb (a, &b);
+	sort_3(*a);
 	while (b)
 	{
-		if (b->value < a->value)
-			pa (&a, &b);
+		if (b->value < (*a)->value)
+			pa (a, &b);
+		
+		if (b->biggest == 1)
+		{
+			pa (a, &b);
+			ra (a);
+		}
 		else
-			ra (&a);
-		print_stack("a", a);
-		print_stack("b", b);
+			ra (a);
+			
 	}
-	print_stack("a", a);
-	print_stack("b", b);
+	while ((*a)->smallest != 1) // можно крутить в обратную сторону если самое маленькое внизу
+		ra(a);
+	
 }
 //
 //end sort
@@ -223,6 +228,44 @@ int	char_to_numbers(t_stack **a, char *str)
 	}
 	return (result * sign);
 }
+void	find_smallest(t_stack **stack)
+{
+	t_stack *curent;
+	t_stack *tmp;
+
+	curent = *stack;
+	curent->smallest = 1;
+	tmp = (*stack)->next;
+	while (tmp != NULL)
+	{
+		if (curent->value > tmp->value)
+		{
+			curent->smallest = 0;
+			tmp->smallest = 1;
+			curent = tmp;
+		}
+		tmp = tmp->next;
+	}
+}
+void	find_biggest(t_stack **stack)
+{
+	t_stack *curent;
+	t_stack *tmp;
+
+	curent = *stack;
+	curent->biggest = 1;
+	tmp = (*stack)->next;
+	while (tmp != NULL)
+	{
+		if (curent->value < tmp->value)
+		{
+			curent->biggest = 0;
+			tmp->biggest = 1;
+			curent = tmp;
+		}
+		tmp = tmp->next;
+	}
+}
 
 t_stack	*fill_stack(int argc, char **argv)
 {
@@ -242,15 +285,17 @@ t_stack	*fill_stack(int argc, char **argv)
 		argc--;
 	}
 	check_for_dup(&a);
+	find_smallest(&a);
+	find_biggest(&a);
 	return(a);
 }
 
-// int	main(int argc, char **argv)
-// {
-int	main()
+int	main(int argc, char **argv)
 {
-	int argc = 6;
-	char *argv[] = {"program_name", "100", "-30", "8", "2", "-10"};
+// int	main()
+// {
+// 	int argc = 6;
+// 	char *argv[] = {"program_name", "100", "-30", "8", "2", "-10"};
 
 	t_stack *a;
 
@@ -262,8 +307,9 @@ int	main()
 		sort_2(a);
 	else if (ft_lstsize(a) == 3)
 		sort_3(a);
-	else if (ft_lstsize(a) == 5)
-		sort_5(a);
+	else if (ft_lstsize(a) == 5 || ft_lstsize(a) == 4)
+		sort_5(&a);
+	//print_stack("a", a);
 
 	free_stack(a);
 	return (0);
@@ -271,3 +317,6 @@ int	main()
 // 
 // to do:
 // read about sorting args
+
+// print_stack("a", a);
+// 	print_stack("b", b);
