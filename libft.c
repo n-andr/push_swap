@@ -80,5 +80,14 @@ t_stack	*ft_lstnew(int content)
 	new->next = NULL;
 	return (new);
 }
+
+t_stack	*ft_lstlast(t_stack *stack)
+{
+	if (stack == NULL)
+		return (NULL);
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
+}
 //
 // end libft

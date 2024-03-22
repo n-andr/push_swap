@@ -4,3 +4,8 @@
 .DS_Store
 a.out
 push_swap
+checker_linux
+checker_Mac
+push_swap
+tester.py
+trace.txt

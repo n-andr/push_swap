@@ -45,129 +45,58 @@ void	free_stack(t_stack *stack)
 //
 // end free memory
 
-// moves
-//
-void	pb(t_stack **a, t_stack **b)
-{
-	t_stack	*temp;
-
-	if (*a == NULL)
-		return;
-	temp = *a;
-	*a = (*a)->next;
-	if (*a != NULL)
-		(*a)->previous = NULL;
-	temp->next = *b;
-	if ((*b) != NULL)
-		(*b)->previous = temp;
-	*b = temp;
-	write(1, "pb\n", 3);
-}
-
-void	pa(t_stack **a, t_stack **b)
-{
-	t_stack	*temp;
-
-	if (*b == NULL)
-		return;
-	temp = *b;
-	*b = (*b)->next;
-	if (*b != NULL)
-		(*b)->previous = NULL;
-	temp->next = *a;
-	if ((*a) != NULL)
-		(*a)->previous = temp;
-	*a = temp;
-	write(1, "pa\n", 3);
-}
-void	ra(t_stack **a)
-{
-	t_stack	*last;
-	t_stack *first;
-
-	if (*a == NULL || (*a)->next == NULL)
-		return;
-	last = *a;
-	while (last->next)
-		last = last->next;
-	first = *a;
-	*a = (*a)->next;
-	(*a)->previous = NULL;
-	last->next = first;
-	first->previous = last;
-	first->next = NULL;
-	write(1, "ra\n", 3);
-}
-
-//
-// end moves
-
 //sort
 //
 
-void sort_2(t_stack *stack)
+void sort_2_a(t_stack **stack)
 {
 	int	a;
 	int	b;
 
-	a = stack->value;
-	b = stack->next->value;
-	
+	a = (*stack)->value;
+	b = (*stack)->next->value;
+	// ONLY IN STACK A!!!! 
+	// ALL COMANDS FOR STACK A! 
 	if ((a > b))
-	{
-		
-		stack->value = b;
-		stack->next->value = a;
-		write(1, "sa\n", 3);
-	}
+		sa(stack);
 }
 
-void sort_3(t_stack *stack)
+void sort_3_a(t_stack **stack)
 {
 	int	a;
 	int	b;
 	int	c;
-
-	a = stack->value;
-	b = stack->next->value;
-	c = stack->next->next->value;
+// ONLY IN STACK A!!!! 
+// ALL COMANDS FOR STACK A! 
+	a = (*stack)->value;
+	b = (*stack)->next->value;
+	c = (*stack)->next->next->value;
 	if ((a > b) && (a > c) && (b > c))
 	{
-		stack->value = c;
-		stack->next->next->value = a;
-		write(1, "sa\nrra\n", 7);
+		sa(stack);
+		rra(stack);
 	}
-	if ((a > b) && (a < c) && (b < c))
+	else if ((a > b) && (a < c) && (b < c))
 	{
-		stack->value = b;
-		stack->next->value = a;
-		//stack->next->next->value = a;
-		write(1, "sa\n", 3);
+		sa(stack);
 	}
-	if ((a > b) && (b < c) && (a > c))
+	else if ((a > b) && (b < c) && (a > c))
 	{
-		stack->value = b;
-		stack->next->value = c;
-		stack->next->next->value = a;
-		write(1, "ra\n", 3);
+		ra(stack);
 	}
-	if ((a < b) && (a > c) && (b > c))
+	else if ((a < b) && (a > c) && (b > c))
 	{
-		stack->value = c;
-		stack->next->value = a;
-		stack->next->next->value = b;
-		write(1, "rra\n", 4);
+		rra(stack);
 	}
 	// if ((a < b) && (b < c) && (a < c))
 	// {
 		//do nothing
 	// }
-	if ((a < b) && (b > c) &&(a < c))
+	else if ((a < b) && (b > c) &&(a < c))
 	{
-		//stack->value = a;
-		stack->next->value = c;
-		stack->next->next->value = b;
-		write(1, "ra\nsa\nrra\n", 10);
+		ra(stack);
+		sa(stack);
+		rra(stack);
 	}
 }
 
@@ -178,25 +107,51 @@ void	sort_5(t_stack **a)
 	b = NULL;
 	while (ft_lstsize(*a) > 3)
 		pb (a, &b);
-	sort_3(*a);
+	sort_3_a(a);
+	// print_stack("a", *a);
+	// print_stack("b", b);
 	while (b)
 	{
-		if (b->value < (*a)->value)
-			pa (a, &b);
-		
-		if (b->biggest == 1)
+		find_smallest(a);
+		find_biggest(a);
+		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value) // what if there is only one element in a?
 		{
 			pa (a, &b);
-			ra (a);
+			// print_stack("a/pa", *a);
+			// print_stack("b/pa", b);
+		}
+		else if ((b->value > (ft_lstlast(*a))->value) && (ft_lstlast(*a))->biggest == 1)
+		{
+			pa (a, &b);
+			//ra (a);
+		}
+		// else if (b->biggest == 1)
+		// {
+		// 	pa (a, &b);
+		// 	ra (a);
+		// }
+		else if ((b->value < (*a)->value) && (*a)->smallest == 1)
+		{
+			// //find_smallest(a);
+			// while ((*a)->smallest != 1)
+			// 	ra(a);
+			// (*a)->smallest = 0;
+			pa (a, &b);
 		}
 		else
 			ra (a);
-			
+		// print_stack("a (while (b))", *a);
+		// print_stack("b (while (b))", b);
 	}
+	// print_stack("a", *a);
+	// print_stack("b", b);
+	find_smallest(a);
+	find_biggest(a);
 	while ((*a)->smallest != 1) // можно крутить в обратную сторону если самое маленькое внизу
 		ra(a);
-	
 }
+
+
 //
 //end sort
 
@@ -230,42 +185,55 @@ int	char_to_numbers(t_stack **a, char *str)
 }
 void	find_smallest(t_stack **stack)
 {
-	t_stack *curent;
-	t_stack *tmp;
+	t_stack *current;
+	t_stack *smallest;
 
-	curent = *stack;
-	curent->smallest = 1;
-	tmp = (*stack)->next;
-	while (tmp != NULL)
+	if (stack == NULL || *stack == NULL)
+        return;
+	current = *stack;
+	smallest = *stack;
+	while (current)
 	{
-		if (curent->value > tmp->value)
-		{
-			curent->smallest = 0;
-			tmp->smallest = 1;
-			curent = tmp;
-		}
-		tmp = tmp->next;
+		current->smallest = 0;
+		current = current->next;
 	}
+	current = *stack;
+	while (current != NULL)
+	{
+		if (current->value < smallest->value)
+			smallest = current;
+		current = current->next;
+	}
+	smallest->smallest = 1;
 }
+
 void	find_biggest(t_stack **stack)
 {
-	t_stack *curent;
-	t_stack *tmp;
+	t_stack *current;
+	t_stack *biggest;
 
-	curent = *stack;
-	curent->biggest = 1;
-	tmp = (*stack)->next;
-	while (tmp != NULL)
+	if (stack == NULL || *stack == NULL)
+        return;
+	current = *stack;
+	biggest = *stack;
+	while (current)
 	{
-		if (curent->value < tmp->value)
-		{
-			curent->biggest = 0;
-			tmp->biggest = 1;
-			curent = tmp;
-		}
-		tmp = tmp->next;
+		current->biggest = 0;
+		current = current->next;
 	}
+	current = *stack;
+	while (current != NULL)
+	{
+		if (current->value > biggest->value)
+			biggest = current;
+		current = current->next;
+	}
+	biggest->biggest = 1;
 }
+// void	assign_index(t_stack **a)
+// {
+
+// }
 
 t_stack	*fill_stack(int argc, char **argv)
 {
@@ -287,6 +255,7 @@ t_stack	*fill_stack(int argc, char **argv)
 	check_for_dup(&a);
 	find_smallest(&a);
 	find_biggest(&a);
+	//assign_index(&a);
 	return(a);
 }
 
@@ -304,10 +273,12 @@ int	main(int argc, char **argv)
 	a = fill_stack((argc), (argv));
 	//printf("list size:%d\n", ft_lstsize(a));
 	if (ft_lstsize(a) == 2)
-		sort_2(a);
+		sort_2_a(&a);
 	else if (ft_lstsize(a) == 3)
-		sort_3(a);
+		sort_3_a(&a);
 	else if (ft_lstsize(a) == 5 || ft_lstsize(a) == 4)
+		sort_5(&a);
+	else if (ft_lstsize(a) > 5)
 		sort_5(&a);
 	//print_stack("a", a);
 
