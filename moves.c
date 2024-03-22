@@ -10,7 +10,8 @@ void	sa(t_stack **a)
 		return;
 	tmp = *a;
 	*a = (*a)->next;
-	(*a)->next->previous = tmp;
+	if ((*a)->next != NULL)
+		(*a)->next->previous = tmp;
 	(*a)->previous = NULL;
 	tmp->previous = *a;
 	tmp->next = (*a)->next;
@@ -26,7 +27,8 @@ void	sb(t_stack **b)
 		return;
 	tmp = *b;
 	*b = (*b)->next;
-	(*b)->next->previous = tmp;
+	if ((*b)->next != NULL)
+		(*b)->next->previous = tmp;
 	(*b)->previous = NULL;
 	tmp->previous = *b;
 	tmp->next = (*b)->next;
