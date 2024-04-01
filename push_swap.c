@@ -49,7 +49,7 @@ void	free_stack(t_stack *stack)
 //
 int	find_sorted_list(t_stack *a)
 {
-	int	start_value; // можно заменить на поинтер на значение
+	int	best_start_value; // можно заменить на поинтер на значение
 	int	current_value;
 	int	current_start_value;
 	int list_len;
@@ -58,7 +58,7 @@ int	find_sorted_list(t_stack *a)
 
 	max_list_len = 1;
 	list_len = 1;
-	start_value = a->value;
+	best_start_value = a->value;
 	
 	while (a != NULL)
 	{
@@ -80,7 +80,7 @@ int	find_sorted_list(t_stack *a)
 		if (list_len > max_list_len)
 		{
 			max_list_len = list_len;
-			start_value = current_start_value;
+			best_start_value = current_start_value;
 			// printf("start value: %d\n", start_value);
 
 		}
@@ -91,7 +91,7 @@ int	find_sorted_list(t_stack *a)
 	}
 	// printf("start value: %d\n", start_value);
 	//print_stack("a", a);
-	return (start_value);
+	return (best_start_value);
 }
 
 void	extract_sorted_list(t_stack **a, t_stack **b)
@@ -183,17 +183,8 @@ void	sort_5(t_stack **a)
 	while (ft_lstsize(*a) > 3)
 		pb (a, &b);
 	sort_3_a(a);
-	print_stack("a", *a);
-	print_stack("b", b);
 	if (ft_lstsize(b) == 2 && (b->value > b->next->value))
-		{
-			print_stack("b", b);
 			sb(&b);
-			print_stack("b", b);
-		}
-
-	print_stack("a", *a);
-	print_stack("b", b);
 	while (b)
 	{
 		find_smallest(a);
@@ -216,7 +207,7 @@ void	sort_5(t_stack **a)
 	find_smallest(a);
 	find_biggest(a);
 	while ((*a)->smallest != 1) // можно крутить в обратную сторону если самое маленькое внизу
-		ra(a);
+		move_smalest_top(a);
 }
 
 void	sort_all(t_stack **a)
@@ -236,9 +227,11 @@ void	sort_all(t_stack **a)
 	// print_stack("a", *a);
 	// print_stack("b", b);
 	while (b)
-	{
+	{	
 		find_smallest(a);
 		find_biggest(a);
+		// if (ft_lstsize(b) >= 2 && (b->value > b->next->value))
+		// 	sb(&b);
 		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value) // what if there is only one element in a?
 		{
 			pa (a, &b);
@@ -269,7 +262,7 @@ void	sort_all(t_stack **a)
 	find_smallest(a);
 	find_biggest(a);
 	while ((*a)->smallest != 1) // можно крутить в обратную сторону если самое маленькое внизу
-		ra(a);
+		move_smalest_top(a);
 }
 
 
@@ -392,6 +385,7 @@ int	main(int argc, char **argv)
 	argc_check(argc);
 	
 	a = fill_stack((argc), (argv));
+	//create_array(a);
 	//printf("list size:%d\n", ft_lstsize(a));
 	if (ft_lstsize(a) == 2)
 		sort_2_a(&a);

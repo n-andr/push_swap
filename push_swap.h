@@ -55,5 +55,10 @@ void	rra(t_stack **a);
 void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
 
+void	move_smalest_top(t_stack **a);
+
+//indexing
+int	*create_array(t_stack *stack);
+
 
 #endif

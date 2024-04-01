@@ -243,5 +243,32 @@ void	rrr(t_stack **a, t_stack **b)
 	*b = last;
 	write(1, "rrr\n", 4);
 }
+
+// void	r_or_rr(char name, t_stack **stack)
+// {
+
+// 	if (name == "a")
+// 	{}
+// 	else
+// 	{}
+// }
+void	move_smalest_top(t_stack **a)
+{
+	int	i;
+	t_stack *smallest;
+
+	i = ft_lstsize(*a);
+	smallest = *a;
+	while (smallest->smallest != 1 && smallest != NULL)
+	{
+		smallest = smallest->next;
+	}
+	
+	if (ft_lstsize(smallest) >= i / 2)
+		ra(a);
+	else 
+		rra(a);
+	
+}
 //
 // end moves
