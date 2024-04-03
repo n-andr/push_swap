@@ -9,6 +9,7 @@ void	print_stack(char *ch, t_stack *stack)
 		printf("value: %d   ", stack->value); 
 		printf("smallest: %d   ", stack->smallest);
 		printf("biggest: %d   ", stack->biggest);
+		printf("marker: %d   ", stack->marker);
 		if (stack->previous != NULL)
 			printf("- previous value: %d   ", stack->previous->value);
 		else
@@ -55,9 +56,11 @@ int	find_sorted_list(t_stack *a)
 	int list_len;
 	int max_list_len;
 	t_stack *tmp;
+	t_stack *a_start;
 
 	max_list_len = 1;
 	list_len = 1;
+	a_start = a;
 	best_start_value = a->value;
 	
 	while (a != NULL)
@@ -66,7 +69,7 @@ int	find_sorted_list(t_stack *a)
 		current_start_value = tmp->value;
 		current_value = tmp->value;
 		
-		while (tmp != NULL)
+		while (tmp->value != current_start_value)
 		{
 			if (current_value < tmp->value)
 			{
@@ -74,6 +77,11 @@ int	find_sorted_list(t_stack *a)
 				current_value = tmp->value;
 			}
 			tmp = tmp->next;
+			if (tmp == NULL)
+			{
+				tmp = a_start;
+			}
+			
 		}
 		// printf("list_len: %d\n", list_len);
 		// printf("max_list_len: %d\n", max_list_len);
@@ -94,32 +102,70 @@ int	find_sorted_list(t_stack *a)
 	return (best_start_value);
 }
 
+void	mark_sorted_list(t_stack *a, int start_value)
+{
+	t_stack	*a_start;
+	int	curent_value;
+
+	a_start = a;
+	while (a->value != start_value)
+	{
+		a = a->next;
+	}
+	a->marker = 1;
+	curent_value = start_value;
+	while (a->value != start_value)
+	{
+		if (curent_value < a->value)
+		{
+			a->marker = 1;
+			curent_value = a->value;
+		}
+		a = a->next;
+		if (a == NULL)
+		{
+			a = a_start;
+		}
+	}
+}
+
 void	extract_sorted_list(t_stack **a, t_stack **b)
 {
 	int start_value;
 	t_stack	*start_stack;
 
 	start_value = find_sorted_list(*a);
+	mark_sorted_list(*a, start_value);
 
-	while ((*a)->value != start_value && a != NULL)
-		pb(a, b);
+	// while ((*a)->value != start_value && a != NULL)
+	// 	pb(a, b);
 	start_stack = *a;
-	ra(a);
-	
-	while (a != NULL && (*a)->value != start_stack->value)
+	while (a != NULL && ft_lstsize(*a) != 1)
 	{
-		if (start_value < (*a)->value)
-		{
-			start_value = (*a)->value;
-			// printf ("start value: %d\n", start_value);
-			// printf ("(*a)->value: %d\n", (*a)->value);
+		if ((*a)->marker == 1)
 			ra(a);
-		}
 		else
 			pb(a,b);
-		// print_stack("a", *a);
-		// print_stack("b", *b);
+		print_stack("a", *a);
+		print_stack("b", *b);
 	}
+	
+	// ra(a);
+	
+	// while (a != NULL && (*a)->value != start_stack->value)
+	// {
+	// 	if (start_value < (*a)->value)
+	// 	{
+	// 		start_value = (*a)->value;
+	// 		// printf ("start value: %d\n", start_value);
+	// 		// printf ("(*a)->value: %d\n", (*a)->value);
+	// 		ra(a);
+	// 	}
+	// 	else
+	// 		pb(a,b);
+	// 	// print_stack("a", *a);
+	// 	// print_stack("b", *b);
+	// }
 	*a = start_stack;
 }
 
@@ -396,7 +442,7 @@ int	main(int argc, char **argv)
 	else if (ft_lstsize(a) > 5)
 		sort_all(&a);
 
-	//print_stack("a", a);
+	print_stack("a", a);
 
 	free_stack(a);
 	return (0);

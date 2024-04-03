@@ -15,6 +15,7 @@ typedef struct s_stack
 	struct s_stack	*previous;
 	int	biggest;
 	int	smallest;
+	int marker;
 //	int	index;
 }	t_stack;
 
