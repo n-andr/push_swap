@@ -4,22 +4,21 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SOURCES = push_swap.c libft.c errors.c moves.c indexing.c
+SOURCES = push_swap.c libft.c errors.c moves.c indexing.c sort_all.c find_sorted_list.c
 
 OBJS:= $(SOURCES:%.c=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-#	 ar rc $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $@
 
 clean:
-	rm -rf $(OBJS)
-	rm -f *.o
+	rm -f $(OBJS)
 
 fclean: clean
-	rm -Rf $(NAME)
+	rm -f $(NAME)
 
 re: fclean all 
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
