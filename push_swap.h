@@ -17,6 +17,9 @@ typedef struct s_stack
 	int	smallest;
 	int marker;
 	int	index;
+	int moves;
+	int moves_in_a;
+	int	moves_in_b;
 }	t_stack;
 
 //to be deleted

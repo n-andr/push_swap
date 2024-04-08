@@ -11,6 +11,9 @@ void	print_stack(char *ch, t_stack *stack)
 		printf("smallest: %d   ", stack->smallest);
 		printf("biggest: %d   ", stack->biggest);
 		printf("marker: %d   ", stack->marker);
+		printf("moves: %d   ", stack->moves);
+		printf("moves in a: %d   ", stack->moves_in_a);
+		printf("moves in b: %d   ", stack->moves_in_b);
 		if (stack->previous != NULL)
 			printf("- previous value: %d   ", stack->previous->value);
 		else
@@ -185,6 +188,7 @@ void	find_smallest(t_stack **stack)
 	while (current)
 	{
 		current->smallest = 0;
+		current->marker = 0;
 		current = current->next;
 	}
 	current = *stack;
