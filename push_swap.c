@@ -1,156 +1,149 @@
 #include "push_swap.h"
-// errorc.c
-//
+// to be deleted
 
-void	argc_check (int argc)
+void	print_stack(char *ch, t_stack *stack)
 {
-	if (argc == 1)
-        exit (EXIT_FAILURE);
-}
-
-int		write_error(t_stack **stack)
-{
-	write (1, "Error\n", 6);
-	free_stack(stack);
-	exit (EXIT_FAILURE);
-	return (0);
-}
-
-int	check_for_dup(t_stack **a)
-{
-	t_stack *tmp;
-	t_stack *curent;
-
-	curent = *a;
-	while (curent != NULL)
+	printf("stack %s:\n", ch);
+	while (stack!= NULL) 
 	{
-		tmp = curent->next;
-		while (tmp != NULL)
-		{
-			if (curent ->value == tmp ->value)
-				write_error(a);
-			tmp = tmp -> next;
-		}
-		curent = curent -> next;
+		printf("value: %d   ", stack->value); 
+		printf("index: %d   ", stack->index);
+		printf("smallest: %d   ", stack->smallest);
+		printf("biggest: %d   ", stack->biggest);
+		printf("marker: %d   ", stack->marker);
+		printf("moves: %d   ", stack->moves);
+		printf("moves in a: %d   ", stack->moves_in_a);
+		printf("moves in b: %d   ", stack->moves_in_b);
+		if (stack->previous != NULL)
+			printf("- previous value: %d   ", stack->previous->value);
+		else
+			printf("- previous value: NULL   ");
+		if (stack->next != NULL)
+			printf("- next value: %d\n", stack->next->value);
+		else
+			printf("- next value: NULL\n");
+		stack = stack->next;
 	}
-	return (0);
 }
+//end to be deleted
 
-//
-// end errorc.c
-
-//free
+//free memory
 //
 
-void	free_stack(t_stack **stack)
+void	free_stack(t_stack *stack)
 {
 	t_stack	*tmp;
 	t_stack	*current;
 
-	if (stack == NULL)
+	if (stack == NULL || stack == NULL)
 		return;
-	current = *stack;
+	current = stack;
 	while (current != NULL)
 	{
 		tmp = current->next;
 		free(current);
 		current = tmp;
 	}
-	*stack = NULL;
+	stack = NULL;
 }
 
 //
-// end free
+// end free memory
 
 //sort
 //
 
-void sort_2(t_stack *stack)
+
+
+void sort_2_a(t_stack **stack)
 {
 	int	a;
 	int	b;
 
-	a = stack->value;
-	b = stack->next->value;
-	
+	a = (*stack)->value;
+	b = (*stack)->next->value;
+	// ONLY IN STACK A!!!! 
+	// ALL COMANDS FOR STACK A! 
 	if ((a > b))
-	{
-		
-		stack->value = b;
-		stack->next->value = a;
-		write(1, "sa\n", 3);
-	}
+		sa(stack);
 }
 
-void sort_3(t_stack *stack)
+void sort_3_a(t_stack **stack)
 {
 	int	a;
 	int	b;
 	int	c;
-
-	a = stack->value;
-	b = stack->next->value;
-	c = stack->next->next->value;
-	// if (a > b)
-	// {
-	// 	if (a > c)
-	// 			write(1, "sa\nrra\n", 6);
-	// 	else if (a < c)
-	// 		write(1, "ra\n", 3);
-	// 	else
-	// 		write(1, "sa\n", 3);
-	// }
-	// else // a < b
-	// {
-	// 	if (b < c)
-	// 		write(1, "\n", 1); //remove
-	// 	else if (b > c)
-	// 		write(1, "ra\nsa\nrra\n", 10);
-	// 	else
-	// 		write(1, "rra\n", 4);
-	// }
-	//if need to save lines: (needs corrections)
+// ONLY IN STACK A!!!! 
+// ALL COMANDS FOR STACK A! 
+	a = (*stack)->value;
+	b = (*stack)->next->value;
+	c = (*stack)->next->next->value;
 	if ((a > b) && (a > c) && (b > c))
 	{
-		stack->value = c;
-		stack->next->next->value = a;
-		write(1, "sa\nrra\n", 7);
+		sa(stack);
+		rra(stack);
 	}
-
-
-	//fix this 
-	//use calloc everywhere
-
-	// if ((a > b) && (a < c) && (b < c))
-	// {
-	// 	stack->value = b;
-	// 	stack->next->value = a;
-	// 	write(1, "ra\n", 3);
-	// }
-	// if ((a > b) && (b < c) && (a < c))
-	// {
-	// 	stack->value = c;
-	// 	stack->next->next->value = a;
-	// 	write(1, "sa\n", 3);
-	// }
-	if ((a < b) && (a > c) && (b > c))
+	else if ((a > b) && (a < c) && (b < c))
 	{
-		stack->next->value = a;
-		stack->next->next->value = b;
-		write(1, "rra\n", 4);
+		sa(stack);
+	}
+	else if ((a > b) && (b < c) && (a > c))
+	{
+		ra(stack);
+	}
+	else if ((a < b) && (a > c) && (b > c))
+	{
+		rra(stack);
 	}
 	// if ((a < b) && (b < c) && (a < c))
 	// {
-		
+		//do nothing
 	// }
-	if ((a < b) && (b > c) &&(a < c))
+	else if ((a < b) && (b > c) &&(a < c))
 	{
-		stack->value = a;
-		stack->next->value = c;
-		stack->next->next->value = b;
-		write(1, "ra\nsa\nrra\n", 10);
+		ra(stack);
+		sa(stack);
+		rra(stack);
 	}
 }
+
+void	sort_5(t_stack **a)
+{
+	t_stack	*b;
+
+	b = NULL;
+	while (ft_lstsize(*a) > 3)
+		pb (a, &b);
+	sort_3_a(a);
+	if (ft_lstsize(b) == 2 && (b->value > b->next->value))
+			sb(&b);
+	while (b)
+	{
+		find_smallest(a);
+		find_biggest(a);
+		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value) // what if there is only one element in a?
+		{
+			pa (a, &b);
+		}
+		else if ((b->value > (ft_lstlast(*a))->value) && (ft_lstlast(*a))->biggest == 1)
+		{
+			pa (a, &b);
+		}
+		else if ((b->value < (*a)->value) && (*a)->smallest == 1)
+		{
+			pa (a, &b);
+		}
+		else
+			ra (a);
+	}
+	find_smallest(a);
+	find_biggest(a);
+	while ((*a)->smallest != 1) // можно крутить в обратную сторону если самое маленькое внизу
+		move_smalest_top(a);
+}
+
+
+
 
 //
 //end sort
@@ -183,39 +176,58 @@ int	char_to_numbers(t_stack **a, char *str)
 	}
 	return (result * sign);
 }
-
-int	ft_lstsize(t_stack *lst)
+void	find_smallest(t_stack **stack)
 {
-	int	len;
+	t_stack *current;
+	t_stack *smallest;
 
-	len = 0;
-	while (lst)
+	if (stack == NULL || *stack == NULL)
+        return;
+	current = *stack;
+	smallest = *stack;
+	while (current)
 	{
-		lst = lst->next;
-		len++;
+		current->smallest = 0;
+		current->marker = 0;
+		current = current->next;
 	}
-	return (len);
+	current = *stack;
+	while (current != NULL)
+	{
+		if (current->value < smallest->value)
+			smallest = current;
+		current = current->next;
+	}
+	smallest->smallest = 1;
 }
 
-void	ft_lstadd_front(t_stack **lst, t_stack *new)
+void	find_biggest(t_stack **stack)
 {
-	if (new == NULL || lst == NULL)
-		return ;
-	new->next = *lst;
-	*lst = new;
-}
+	t_stack *current;
+	t_stack *biggest;
 
-t_stack	*ft_lstnew(int content)
-{
-	t_stack	*new;
-
-	new = (t_stack *)malloc(sizeof(t_stack));
-	if (new == 0)
-		return (NULL);
-	new->value = content;
-	new->next = NULL;
-	return (new);
+	if (stack == NULL || *stack == NULL)
+        return;
+	current = *stack;
+	biggest = *stack;
+	while (current)
+	{
+		current->biggest = 0;
+		current = current->next;
+	}
+	current = *stack;
+	while (current != NULL)
+	{
+		if (current->value > biggest->value)
+			biggest = current;
+		current = current->next;
+	}
+	biggest->biggest = 1;
 }
+// void	assign_index(t_stack **a)
+// {
+
+// }
 
 t_stack	*fill_stack(int argc, char **argv)
 {
@@ -226,10 +238,18 @@ t_stack	*fill_stack(int argc, char **argv)
 	while (argc > 1)
 	{
 		new = ft_lstnew(char_to_numbers(&a, argv[argc - 1]));
+		if (new == NULL)
+        {
+            free_stack(a); // Free memory if allocation fails
+            return NULL;
+        }
 		ft_lstadd_front(&a, new);
 		argc--;
 	}
 	check_for_dup(&a);
+	find_smallest(&a);
+	find_biggest(&a);
+	indexing(a);
 	return(a);
 }
 
@@ -237,30 +257,34 @@ int	main(int argc, char **argv)
 {
 // int	main()
 // {
-// 	int argc = 5;
-// 	char *argv[] = {"program_name", "1", "3", "8", "2"};
+// 	int argc = 6;
+// 	char *argv[] = {"program_name", "100", "-30", "8", "2", "-10"};
 
 	t_stack *a;
 
 	argc_check(argc);
 	
 	a = fill_stack((argc), (argv));
+	//create_array(a);
 	//printf("list size:%d\n", ft_lstsize(a));
 	if (ft_lstsize(a) == 2)
-		sort_2(a);
+		sort_2_a(&a);
 	else if (ft_lstsize(a) == 3)
+		sort_3_a(&a);
+	else if (ft_lstsize(a) == 5 || ft_lstsize(a) == 4)
+		sort_5(&a);
+	else if (ft_lstsize(a) > 5)
+		//sort_5(&a);
+		sort_all(&a);
 
-		sort_3(a);
-	while (a!= NULL)
-	{
-		printf("%d\n", a->value);
-		a = a->next;
-	}
+	//print_stack("a", a);
 
-	free_stack(&a);
-	//free(a); not sure
+	free_stack(a);
 	return (0);
 } 
 // 
 // to do:
 // read about sorting args
+
+// print_stack("a", a);
+// 	print_stack("b", b);
