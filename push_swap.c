@@ -7,7 +7,7 @@ void	print_stack(char *ch, t_stack *stack)
 	while (stack!= NULL) 
 	{
 		printf("value: %d   ", stack->value); 
-		printf("index: %d   ", stack->index);
+		// printf("index: %d   ", stack->index);
 		printf("smallest: %d   ", stack->smallest);
 		printf("biggest: %d   ", stack->biggest);
 		printf("marker: %d   ", stack->marker);
@@ -249,7 +249,7 @@ t_stack	*fill_stack(int argc, char **argv)
 	check_for_dup(&a);
 	find_smallest(&a);
 	find_biggest(&a);
-	indexing(a);
+	// indexing(a);
 	return(a);
 }
 

@@ -141,11 +141,11 @@ void	count_moves(t_stack *a, t_stack *b)
 		}
 		while (a_tmp && b_tmp)
 		{
-			if (((a_tmp->previous == NULL) && (b_tmp->index < a_tmp->index) && (b_tmp->index > ft_lstlast(a_tmp)->index))
-			|| ((a_tmp->previous != NULL) && (b_tmp->index > a_tmp->previous->index) && (b_tmp->index < a_tmp->index))
-			|| ((a_tmp->smallest == 1) && (b_tmp->index < a_tmp->index))
-			|| ((a_tmp->previous != NULL) && (a_tmp->previous->biggest == 1) && (b_tmp->index > a_tmp->previous->index))
-			|| ((a_tmp->previous == NULL) && (ft_lstlast(a_tmp)->biggest == 1) && (b_tmp->index > ft_lstlast(a_tmp)->index)))
+			if (((a_tmp->previous == NULL) && (b_tmp->value < a_tmp->value) && (b_tmp->value > ft_lstlast(a_tmp)->value))
+			|| ((a_tmp->previous != NULL) && (b_tmp->value > a_tmp->previous->value) && (b_tmp->value < a_tmp->value))
+			|| ((a_tmp->smallest == 1) && (b_tmp->value < a_tmp->value))
+			|| ((a_tmp->previous != NULL) && (a_tmp->previous->biggest == 1) && (b_tmp->value > a_tmp->previous->value))
+			|| ((a_tmp->previous == NULL) && (ft_lstlast(a_tmp)->biggest == 1) && (b_tmp->value > ft_lstlast(a_tmp)->value)))
 			{
 				break;
 			}

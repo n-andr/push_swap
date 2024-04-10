@@ -246,6 +246,7 @@ void	rrr(t_stack **a, t_stack **b)
 
 void	ra_or_rra(t_stack **a, t_stack **b)
 {
+	//should i remove?
 	int i;
 	t_stack *a_tmp;
 	t_stack *b_tmp;
@@ -259,12 +260,12 @@ void	ra_or_rra(t_stack **a, t_stack **b)
 	i = 1; // cuz we start from the second number
 	while (a_tmp)
 	{
-		if ((b_tmp->index > a_tmp->previous->index) 
-		&& (b_tmp->index < a_tmp->index))
+		if ((b_tmp->value > a_tmp->previous->value) 
+		&& (b_tmp->value < a_tmp->value))
 		{
 			break;
 		}
-		if ((b_tmp->index > a_tmp->index) 
+		if ((b_tmp->value > a_tmp->value) 
 		&& (a_tmp->next == NULL))
 		{
 			break;
