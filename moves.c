@@ -244,47 +244,47 @@ void	rrr(t_stack **a, t_stack **b)
 	write(1, "rrr\n", 4);
 }
 
-void	ra_or_rra(t_stack **a, t_stack **b)
-{
-	//should i remove?
-	int i;
-	t_stack *a_tmp;
-	t_stack *b_tmp;
+// void	ra_or_rra(t_stack **a, t_stack **b)
+// {
+// 	//should i remove?
+// 	int i;
+// 	t_stack *a_tmp;
+// 	t_stack *b_tmp;
 
-	a_tmp = (*a)->next;
-	b_tmp = *b;
-	//if a biggest
-	//if a smalest
-	//if null pointer
+// 	a_tmp = (*a)->next;
+// 	b_tmp = *b;
+// 	//if a biggest
+// 	//if a smalest
+// 	//if null pointer
 	
-	i = 1; // cuz we start from the second number
-	while (a_tmp)
-	{
-		if ((b_tmp->value > a_tmp->previous->value) 
-		&& (b_tmp->value < a_tmp->value))
-		{
-			break;
-		}
-		if ((b_tmp->value > a_tmp->value) 
-		&& (a_tmp->next == NULL))
-		{
-			break;
-		}
-		a_tmp = a_tmp->next;
-		i++;
-	}
-	// printf("i = %d\n", i);
-	// print_stack("a (ra or rra)", *a);
-	// print_stack("b (ra or rra)", *b);
-	if (ft_lstsize(*a) / 2 >= i)
-	{
-		ra(a);
-	}
-	else
-		rra(a);
+// 	i = 1; // cuz we start from the second number
+// 	while (a_tmp)
+// 	{
+// 		if ((b_tmp->value > a_tmp->previous->value) 
+// 		&& (b_tmp->value < a_tmp->value))
+// 		{
+// 			break;
+// 		}
+// 		if ((b_tmp->value > a_tmp->value) 
+// 		&& (a_tmp->next == NULL))
+// 		{
+// 			break;
+// 		}
+// 		a_tmp = a_tmp->next;
+// 		i++;
+// 	}
+// 	// printf("i = %d\n", i);
+// 	// print_stack("a (ra or rra)", *a);
+// 	// print_stack("b (ra or rra)", *b);
+// 	if (ft_lstsize(*a) / 2 >= i)
+// 	{
+// 		ra(a);
+// 	}
+// 	else
+// 		rra(a);
 	
 	
-}
+// }
 void	move_smalest_top(t_stack **a)
 {
 	int	i;

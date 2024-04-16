@@ -76,6 +76,7 @@ t_stack	*ft_lstnew(int content)
 	new->value = content;
 	new->biggest = 0;
 	new->smallest = 0;
+	new->marker = 0;
 	new->previous = NULL;
 	new->next = NULL;
 	return (new);

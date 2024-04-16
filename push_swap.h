@@ -34,6 +34,10 @@ int	check_for_dup(t_stack **a);
 void	free_stack(t_stack *stack);
 
 //fill stack
+t_stack	*fill_stack(int argc, char **argv);
+int	char_to_numbers(t_stack **a, char *str);
+
+
 void	find_smallest(t_stack **stack);
 void	find_biggest(t_stack **stack);
 
@@ -63,12 +67,16 @@ void	move_smalest_top(t_stack **a);
 void	ra_or_rra(t_stack **a, t_stack **b);
 
 //indexing
-void	*indexing(t_stack *stack);
+// void	*indexing(t_stack *stack);
 
 //sorting
 void	sort_all(t_stack **a);
 int	find_sorted_list(t_stack *a);
 int	mark_sorted_list(t_stack *a, int start_value);
 void	extract_sorted_list(t_stack **a, t_stack **b);
+void	zeroing_moves(t_stack *b);
+t_stack *find_cheapest(t_stack *stack);
+void	move_cheapest(t_stack **a, t_stack **b);
+void	count_moves(t_stack *a, t_stack *b);
 
 #endif

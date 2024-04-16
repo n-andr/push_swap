@@ -5,11 +5,12 @@ void	zeroing_moves(t_stack *b)
 	while (b)
 	{
 		b->moves = 0;
+		b->moves_in_a = 0;
+		b->moves_in_b = 0;
 		b = b->next;
 	}
-	
-
 }
+
 t_stack *find_cheapest(t_stack *stack)
 {
 	t_stack *b_tmp;
@@ -127,6 +128,7 @@ void	count_moves(t_stack *a, t_stack *b)
 	t_stack *b_tmp;
 	int	moves_in_b;
 	int	moves_in_a;
+
 	b_tmp = b;
 	while (b_tmp && ft_lstlast(b_tmp)->moves == 0)
 	{
@@ -183,8 +185,6 @@ void	count_moves(t_stack *a, t_stack *b)
 		else
 			b_tmp->moves = moves_in_a + moves_in_b;
 	}
-// 	print_stack("56 a (count moves)", a);
-// 	print_stack("57 b (count moves)", b);
 }
 
 void	sort_all(t_stack **a)
@@ -193,47 +193,25 @@ void	sort_all(t_stack **a)
 
 	b = NULL;
 	extract_sorted_list(a, &b);
-	// print_stack("a", *a);
-	// print_stack("b", b);
 	while (b)
 	{	
 		find_smallest(a);
 		find_biggest(a);
-		// if (ft_lstsize(b) >= 2 && (b->value > b->next->value))
-		// 	sb(&b);
-		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value) // what if there is only one element in a?
-		{
+		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value)
 			pa (a, &b);
-			// print_stack("a/pa", *a);
-			// print_stack("b/pa", b);
-		}
 		else if ((b->value > (ft_lstlast(*a))->value) && (ft_lstlast(*a))->biggest == 1)
-		{
 			pa (a, &b);
-		}
 		else if ((b->value < (*a)->value) && (*a)->smallest == 1)
-		{
 			pa (a, &b);
-		}
 		else
 		{
 			zeroing_moves(b);
 			count_moves(*a, b);
 			move_cheapest(a, &b);
-			//ra_or_rra(a, &b);
 		}
-		// if(b)
-		// 	zeroing_moves(b);
-		// 	count_moves(*a, b);
-		// print_stack("a (while (b))", *a);
-		// print_stack("b (while (b))", b);
 	}
-	// print_stack("a", *a);
-	// print_stack("b", b);
 	find_smallest(a);
 	find_biggest(a);
-	while ((*a)->smallest != 1) // можно крутить в обратную сторону если самое маленькое внизу
-	{
+	while ((*a)->smallest != 1)
 		move_smalest_top(a);
-	}
 }
