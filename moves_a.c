@@ -1,10 +1,11 @@
 #include "push_swap.h"
+
 void	sa(t_stack **a)
 {
 	t_stack	*tmp;
 
 	if (*a == NULL || (*a)->next == NULL)
-		return;
+		return ;
 	tmp = *a;
 	*a = (*a)->next;
 	if ((*a)->next != NULL)
@@ -15,13 +16,14 @@ void	sa(t_stack **a)
 	(*a)->next = tmp;
 	write(1, "sa\n", 3);
 }
+
 void	ra(t_stack **a)
 {
 	t_stack	*last;
-	t_stack *first;
+	t_stack	*first;
 
 	if (*a == NULL || (*a)->next == NULL)
-		return;
+		return ;
 	last = *a;
 	while (last->next)
 		last = last->next;
@@ -37,8 +39,9 @@ void	ra(t_stack **a)
 void	rra(t_stack **a)
 {
 	t_stack	*last;
+
 	if (*a == NULL || (*a)->next == NULL)
-		return;
+		return ;
 	last = *a;
 	while (last->next)
 		last = last->next;
@@ -52,8 +55,8 @@ void	rra(t_stack **a)
 
 void	move_smalest_top(t_stack **a)
 {
-	int	i;
-	t_stack *smallest;
+	int		i;
+	t_stack	*smallest;
 
 	i = ft_lstsize(*a);
 	smallest = *a;
@@ -63,6 +66,6 @@ void	move_smalest_top(t_stack **a)
 	}
 	if (ft_lstsize(smallest) >= i / 2)
 		ra(a);
-	else 
+	else
 		rra(a);
 }

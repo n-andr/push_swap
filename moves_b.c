@@ -5,7 +5,7 @@ void	sb(t_stack **b)
 	t_stack	*tmp;
 
 	if (*b == NULL || (*b)->next == NULL)
-		return;
+		return ;
 	tmp = *b;
 	*b = (*b)->next;
 	if ((*b)->next != NULL)
@@ -20,10 +20,10 @@ void	sb(t_stack **b)
 void	rb(t_stack **b)
 {
 	t_stack	*last;
-	t_stack *first;
+	t_stack	*first;
 
 	if (*b == NULL || (*b)->next == NULL)
-		return;
+		return ;
 	last = *b;
 	while (last->next)
 		last = last->next;
@@ -41,7 +41,7 @@ void	rrb(t_stack **b)
 	t_stack	*last;
 
 	if (*b == NULL || (*b)->next == NULL)
-		return;
+		return ;
 	last = *b;
 	while (last->next)
 		last = last->next;

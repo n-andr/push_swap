@@ -1,4 +1,5 @@
 #include "push_swap.h"
+
 // to print stack
 
 // void	print_stack(char *ch, t_stack *stack)
@@ -29,35 +30,6 @@
 // 	print_stack("b", b);
 //end to print stack
 
-//free memory
-//
-
-void	free_stack(t_stack *stack)
-{
-	t_stack	*tmp;
-	t_stack	*current;
-
-	if (stack == NULL || stack == NULL)
-		return;
-	current = stack;
-	while (current != NULL)
-	{
-		tmp = current->next;
-		free(current);
-		current = tmp;
-	}
-	stack = NULL;
-}
-
-//
-// end free memory
-
-//sort
-//
-
-
-// ONLY IN STACK A!!!! 
-// ALL COMANDS FOR STACK A! 
 void sort_2_a(t_stack **stack)
 {
 	int	a;
@@ -69,8 +41,6 @@ void sort_2_a(t_stack **stack)
 		sa(stack);
 }
 
-// ONLY IN STACK A!!!! 
-// ALL COMANDS FOR STACK A! 
 void sort_3_a(t_stack **stack)
 {
 	int	a;
@@ -109,8 +79,7 @@ void	sort_5(t_stack **a)
 	sort_3_a(a);
 	while (b)
 	{
-		find_smallest(a);
-		find_biggest(a);
+		smallest_and_biggest(a);
 		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value)
 			pa (a, &b);
 		else if ((b->value > (ft_lstlast(*a))->value) && (ft_lstlast(*a))->biggest == 1)
@@ -121,72 +90,45 @@ void	sort_5(t_stack **a)
 		{
 			zeroing_moves(b);
 			count_moves(*a, b);
-			move_cheapest(a, &b);
+			move_least_moves(a, &b);
 		}
 	}
-	find_smallest(a);
-	find_biggest(a);
+	smallest_and_biggest(a);
 	while ((*a)->smallest != 1)
 		move_smalest_top(a);
 }
 
-//
-//end sort
-
-
-void	find_smallest(t_stack **stack)
+void	sort_all(t_stack **a)
 {
-	t_stack *current;
-	t_stack *smallest;
+	t_stack	*b;
 
-	if (stack == NULL || *stack == NULL)
-        return;
-	current = *stack;
-	smallest = *stack;
-	while (current)
-	{
-		current->smallest = 0;
-		current = current->next;
+	b = NULL;
+	extract_sorted_list(a, &b);
+	while (b)
+	{	
+		smallest_and_biggest(a);
+		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value)
+			pa (a, &b);
+		else if ((b->value > (ft_lstlast(*a))->value) 
+		&& (ft_lstlast(*a))->biggest == 1)
+			pa (a, &b);
+		else if ((b->value < (*a)->value) && (*a)->smallest == 1)
+			pa (a, &b);
+		else
+		{
+			zeroing_moves(b);
+			count_moves(*a, b);
+			move_least_moves(a, &b);
+		}
 	}
-	current = *stack;
-	while (current != NULL)
-	{
-		if (current->value < smallest->value)
-			smallest = current;
-		current = current->next;
-	}
-	smallest->smallest = 1;
+	smallest_and_biggest(a);
+	while ((*a)->smallest != 1)
+		move_smalest_top(a);
 }
-
-void	find_biggest(t_stack **stack)
-{
-	t_stack *current;
-	t_stack *biggest;
-
-	if (stack == NULL || *stack == NULL)
-        return;
-	current = *stack;
-	biggest = *stack;
-	while (current)
-	{
-		current->biggest = 0;
-		current = current->next;
-	}
-	current = *stack;
-	while (current != NULL)
-	{
-		if (current->value > biggest->value)
-			biggest = current;
-		current = current->next;
-	}
-	biggest->biggest = 1;
-}
-
-
 
 int	main(int argc, char **argv)
 {
-	t_stack *a;
+	t_stack	*a;
 
 	argc_check(argc);
 	a = fill_stack((argc), (argv));
