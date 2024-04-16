@@ -4,7 +4,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SOURCES = push_swap.c libft.c errors.c moves.c sort_all.c find_sorted_list.c fill_stack.c
+SOURCES = push_swap.c libft.c errors.c moves_both_stacks.c moves_a.c moves_b.c sort_all.c find_sorted_list.c fill_stack.c
 
 OBJS:= $(SOURCES:%.c=%.o)
 

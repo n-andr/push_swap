@@ -1,10 +1,23 @@
 #include "push_swap.h"
 
 /* Functions list:
+- calculate_result (part of char_to_numbers), separate function cus norminette
 - char_to_numbers aka atoi
 - fill_stack 
  */
 
+long int	calculate_result(long int result, int sign, t_stack **a, char c)
+{
+	if ((c >= '0' && c <= '9'))
+		{
+			result = result * 10 + (c - '0');
+			if ((result * sign) > INT_MAX || (result * sign) < INT_MIN)
+					write_error(a);
+		}
+	else
+		write_error(a);
+	return (result);
+}
 
 int	char_to_numbers(t_stack **a, char *str)
 {
@@ -25,15 +38,8 @@ int	char_to_numbers(t_stack **a, char *str)
 		write_error(a);
 	while (str[i] != '\0')
 	{
-		if ((str[i] >= '0' && str[i] <= '9'))
-		{
-			result = result * 10 + (str[i] - '0');
-			if ((result * sign) > INT_MAX || (result * sign) < INT_MIN)
-					write_error(a);
-			i ++;
-		}
-		else
-			write_error(a);
+		result = calculate_result(result, sign, a, str[i]);
+		i++;	
 	}
 	return (result * sign);
 }
