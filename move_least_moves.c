@@ -1,35 +1,31 @@
 #include "push_swap.h"
 
-void	zeroing_moves(t_stack *b)
-{
-	while (b)
-	{
-		b->moves = 0;
-		b->moves_in_a = 0;
-		b->moves_in_b = 0;
-		b = b->next;
-	}
-}
-
-t_stack *find_least_moves(t_stack *stack)
-{
-	t_stack *b_tmp;
-
-	b_tmp = stack;
-	while (stack)
-	{
-		if (stack->moves < b_tmp->moves)
-			b_tmp = stack;
-		stack = stack->next;
-	}
-	return(b_tmp);
-}
+/*
+Functions:
+do_rr :
+	to do ra & rb sumultaniasly, and to continue doing ra OR rb, 
+	when one of the stack is placed correctly, and other is not yet done.
+do_rrr :
+	to do rra & rrb sumultaniasly, and to continue doing rra OR rrb, 
+	when one of the stack is placed correctly, and other is not yet done.
+rotate_a :
+	to calculate in which direction stack a needs to be rotated and 
+	to perform ra or rra
+rotate_b :
+	to calculate in which direction stack b needs to be rotated and 
+	to perform rb or rrb
+move_least_moves :
+	to decide how rotations should be performed
+	- both stacks same direction rr or rrr
+	- both stacks different derections
+	- only one stack
+*/
 
 void	do_rr(t_stack **a, t_stack **b, int moves_in_a, int moves_in_b)
 {
 	while (moves_in_a > 0 && moves_in_b > 0)
 	{
-		rr(a,b);
+		rr(a, b);
 		moves_in_a --;
 		moves_in_b --;
 	}
@@ -44,13 +40,14 @@ void	do_rr(t_stack **a, t_stack **b, int moves_in_a, int moves_in_b)
 		moves_in_b --;
 	}
 }
+
 void	do_rrr(t_stack **a, t_stack **b, int moves_in_a, int moves_in_b)
 {
 	moves_in_a = ft_lstsize(*a) - moves_in_a;
 	moves_in_b = ft_lstsize(*b) - moves_in_b;
 	while (moves_in_a > 0 && moves_in_b > 0)
 	{
-		rrr(a,b);
+		rrr(a, b);
 		moves_in_a --;
 		moves_in_b --;
 	}
@@ -111,8 +108,8 @@ void	rotate_b(t_stack **b, int moves_in_b)
 void	move_least_moves(t_stack **a, t_stack **b)
 {
 	t_stack	*b_tmp;
-	int	moves_in_a;
-	int	moves_in_b;
+	int		moves_in_a;
+	int		moves_in_b;
 
 	b_tmp = find_least_moves(*b);
 	moves_in_a = b_tmp->moves_in_a;
@@ -129,6 +126,3 @@ void	move_least_moves(t_stack **a, t_stack **b)
 			rotate_b(b, moves_in_b);
 	}
 }
-
-
-

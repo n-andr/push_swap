@@ -62,7 +62,7 @@ void	ft_lstadd_front(t_stack **lst, t_stack *new)
 		return ;
 	new->next = *lst;
 	if (*lst != NULL)
-        (*lst)->previous = new; 
+        (*lst)->prev = new; 
     *lst = new;
 }
 
@@ -77,7 +77,7 @@ t_stack	*ft_lstnew(int content)
 	new->biggest = 0;
 	new->smallest = 0;
 	new->marker = 0;
-	new->previous = NULL;
+	new->prev = NULL;
 	new->next = NULL;
 	return (new);
 }

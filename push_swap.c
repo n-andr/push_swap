@@ -15,10 +15,10 @@
 // 		printf("moves: %d   ", stack->moves);
 // 		printf("moves in a: %d   ", stack->moves_in_a);
 // 		printf("moves in b: %d   ", stack->moves_in_b);
-// 		if (stack->previous != NULL)
-// 			printf("- previous value: %d   ", stack->previous->value);
+// 		if (stack->prev != NULL)
+// 			printf("- prev value: %d   ", stack->prev->value);
 // 		else
-// 			printf("- previous value: NULL   ");
+// 			printf("- prev value: NULL   ");
 // 		if (stack->next != NULL)
 // 			printf("- next value: %d\n", stack->next->value);
 // 		else
@@ -79,7 +79,7 @@ void	sort_5(t_stack **a)
 	sort_3_a(a);
 	while (b)
 	{
-		smallest_and_biggest(a);
+		mark_smallest_and_biggest(a);
 		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value)
 			pa (a, &b);
 		else if ((b->value > (ft_lstlast(*a))->value) && (ft_lstlast(*a))->biggest == 1)
@@ -93,7 +93,7 @@ void	sort_5(t_stack **a)
 			move_least_moves(a, &b);
 		}
 	}
-	smallest_and_biggest(a);
+	mark_smallest_and_biggest(a);
 	while ((*a)->smallest != 1)
 		move_smalest_top(a);
 }
@@ -106,7 +106,7 @@ void	sort_all(t_stack **a)
 	extract_sorted_list(a, &b);
 	while (b)
 	{	
-		smallest_and_biggest(a);
+		mark_smallest_and_biggest(a);
 		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value)
 			pa (a, &b);
 		else if ((b->value > (ft_lstlast(*a))->value) 
@@ -121,7 +121,7 @@ void	sort_all(t_stack **a)
 			move_least_moves(a, &b);
 		}
 	}
-	smallest_and_biggest(a);
+	mark_smallest_and_biggest(a);
 	while ((*a)->smallest != 1)
 		move_smalest_top(a);
 }

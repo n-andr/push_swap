@@ -9,9 +9,9 @@ void	sb(t_stack **b)
 	tmp = *b;
 	*b = (*b)->next;
 	if ((*b)->next != NULL)
-		(*b)->next->previous = tmp;
-	(*b)->previous = NULL;
-	tmp->previous = *b;
+		(*b)->next->prev = tmp;
+	(*b)->prev = NULL;
+	tmp->prev = *b;
 	tmp->next = (*b)->next;
 	(*b)->next = tmp;
 	write(1, "sb\n", 3);
@@ -29,9 +29,9 @@ void	rb(t_stack **b)
 		last = last->next;
 	first = *b;
 	*b = (*b)->next;
-	(*b)->previous = NULL;
+	(*b)->prev = NULL;
 	last->next = first;
-	first->previous = last;
+	first->prev = last;
 	first->next = NULL;
 	write(1, "rb\n", 3);
 }
@@ -45,10 +45,10 @@ void	rrb(t_stack **b)
 	last = *b;
 	while (last->next)
 		last = last->next;
-	last->previous->next = NULL;
-	(*b)->previous = last;
+	last->prev->next = NULL;
+	(*b)->prev = last;
 	last->next = (*b);
-	last->previous = NULL;
+	last->prev = NULL;
 	*b = last;
 	write(1, "rrb\n", 4);
 }

@@ -29,10 +29,10 @@ void	pb(t_stack **a, t_stack **b)
 	temp = *a;
 	*a = (*a)->next;
 	if (*a != NULL)
-		(*a)->previous = NULL;
+		(*a)->prev = NULL;
 	temp->next = *b;
 	if ((*b) != NULL)
-		(*b)->previous = temp;
+		(*b)->prev = temp;
 	*b = temp;
 	write(1, "pb\n", 3);
 }
@@ -46,10 +46,10 @@ void	pa(t_stack **a, t_stack **b)
 	temp = *b;
 	*b = (*b)->next;
 	if (*b != NULL)
-		(*b)->previous = NULL;
+		(*b)->prev = NULL;
 	temp->next = *a;
 	if ((*a) != NULL)
-		(*a)->previous = temp;
+		(*a)->prev = temp;
 	*a = temp;
 	write(1, "pa\n", 3);
 }
@@ -81,16 +81,16 @@ void	rr(t_stack **a, t_stack **b)
 	last = ft_lstlast(*a);
 	first = *a;
 	*a = (*a)->next;
-	(*a)->previous = NULL;
+	(*a)->prev = NULL;
 	last->next = first;
-	first->previous = last;
+	first->prev = last;
 	first->next = NULL;
 	last = ft_lstlast(*b);
 	first = *b;
 	*b = (*b)->next;
-	(*b)->previous = NULL;
+	(*b)->prev = NULL;
 	last->next = first;
-	first->previous = last;
+	first->prev = last;
 	first->next = NULL;
 	write(1, "rr\n", 3);
 }
@@ -110,16 +110,16 @@ void	rrr(t_stack **a, t_stack **b)
 		return ;
 	}
 	last = ft_lstlast(*a);
-	last->previous->next = NULL;
-	(*a)->previous = last;
+	last->prev->next = NULL;
+	(*a)->prev = last;
 	last->next = (*a);
-	last->previous = NULL;
+	last->prev = NULL;
 	*a = last;
 	last = ft_lstlast(*b);
-	last->previous->next = NULL;
-	(*b)->previous = last;
+	last->prev->next = NULL;
+	(*b)->prev = last;
 	last->next = (*b);
-	last->previous = NULL;
+	last->prev = NULL;
 	*b = last;
 	write(1, "rrr\n", 4);
 }
@@ -140,17 +140,17 @@ void	rrr(t_stack **a, t_stack **b)
 		}
 	tmp = *a;
 	*a = (*a)->next;
-	(*a)->next->previous = tmp;
-	(*a)->previous = NULL;
-	tmp->previous = *a;
+	(*a)->next->prev = tmp;
+	(*a)->prev = NULL;
+	tmp->prev = *a;
 	tmp->next = (*a)->next;
 	(*a)->next = tmp;
 
 	tmp = *b;
 	*b = (*b)->next;
-	(*b)->next->previous = tmp;
-	(*b)->previous = NULL;
-	tmp->previous = *b;
+	(*b)->next->prev = tmp;
+	(*b)->prev = NULL;
+	tmp->prev = *b;
 	tmp->next = (*b)->next;
 	(*b)->next = tmp;
 	write(1, "ss\n", 3);

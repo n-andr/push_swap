@@ -9,9 +9,9 @@ void	sa(t_stack **a)
 	tmp = *a;
 	*a = (*a)->next;
 	if ((*a)->next != NULL)
-		(*a)->next->previous = tmp;
-	(*a)->previous = NULL;
-	tmp->previous = *a;
+		(*a)->next->prev = tmp;
+	(*a)->prev = NULL;
+	tmp->prev = *a;
 	tmp->next = (*a)->next;
 	(*a)->next = tmp;
 	write(1, "sa\n", 3);
@@ -29,9 +29,9 @@ void	ra(t_stack **a)
 		last = last->next;
 	first = *a;
 	*a = (*a)->next;
-	(*a)->previous = NULL;
+	(*a)->prev = NULL;
 	last->next = first;
-	first->previous = last;
+	first->prev = last;
 	first->next = NULL;
 	write(1, "ra\n", 3);
 }
@@ -45,10 +45,10 @@ void	rra(t_stack **a)
 	last = *a;
 	while (last->next)
 		last = last->next;
-	last->previous->next = NULL;
-	(*a)->previous = last;
+	last->prev->next = NULL;
+	(*a)->prev = last;
 	last->next = (*a);
-	last->previous = NULL;
+	last->prev = NULL;
 	*a = last;
 	write(1, "rra\n", 4);
 }

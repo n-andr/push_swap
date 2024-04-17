@@ -12,7 +12,7 @@ typedef struct s_stack
 {
 	int	value; 
 	struct s_stack	*next;
-	struct s_stack	*previous;
+	struct s_stack	*prev;
 	int	biggest;
 	int	smallest;
 	int marker;
@@ -67,7 +67,7 @@ void	move_smalest_top(t_stack **a);
 
 //sorting
 void	sort_all(t_stack **a);
-void	smallest_and_biggest(t_stack **stack);
+void	mark_smallest_and_biggest(t_stack **stack);
 void	find_smallest(t_stack **stack);
 void	find_biggest(t_stack **stack);
 int	find_sorted_list(t_stack *a);

@@ -8,7 +8,7 @@ find_smallest :
 find_biggest :
 	finds and marks the biggest value in the given stack
 */
-void	smallest_and_biggest(t_stack **stack)
+void	mark_smallest_and_biggest(t_stack **stack)
 {
 	find_smallest(stack);
 	find_biggest(stack);
