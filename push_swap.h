@@ -70,7 +70,7 @@ void	sort_all(t_stack **a);
 void	mark_smallest_and_biggest(t_stack **stack);
 void	find_smallest(t_stack **stack);
 void	find_biggest(t_stack **stack);
-int	find_sorted_list(t_stack *a);
+int	find_sorted_list(t_stack *a, t_stack *a_start, t_stack *a_iterator);
 int	mark_sorted_list(t_stack *a, int start_value);
 void	extract_sorted_list(t_stack **a, t_stack **b);
 void	zeroing_moves(t_stack *b);
