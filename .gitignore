@@ -9,3 +9,5 @@ checker_Mac
 push_swap
 tester.py
 trace.txt
+
+push_swap_visualizer/
