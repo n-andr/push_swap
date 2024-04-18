@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves_both_stacks.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/18 12:47:31 by nandreev          #+#    #+#             */
+/*   Updated: 2024/04/18 12:47:48 by nandreev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /*
 Functions:
-
 pb (push b): 
 	Take the first element at the top of a and put it at the top of b.
 	Do nothing if a is empty.

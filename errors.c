@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/18 12:41:52 by nandreev          #+#    #+#             */
+/*   Updated: 2024/04/18 13:03:43 by nandreev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /* Error list:
@@ -8,18 +20,13 @@
 - invalid char (letter or ,.-/etc) : error 
 5/5 done */
 
-
-
-// errors.c
-//
-
-void	argc_check (int argc)
+void	argc_check(int argc)
 {
 	if (argc == 1)
-        exit (EXIT_FAILURE);
+		exit (EXIT_FAILURE);
 }
 
-int		write_error(t_stack **stack)
+int	write_error(t_stack **stack)
 {
 	write (1, "Error\n", 6);
 	free_stack(*stack);
@@ -29,8 +36,8 @@ int		write_error(t_stack **stack)
 
 int	check_for_dup(t_stack **a)
 {
-	t_stack *tmp;
-	t_stack *curent;
+	t_stack	*tmp;
+	t_stack	*curent;
 
 	curent = *a;
 	while (curent != NULL)
@@ -46,6 +53,3 @@ int	check_for_dup(t_stack **a)
 	}
 	return (0);
 }
-
-//
-// end errors.c

@@ -1,4 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/18 12:49:27 by nandreev          #+#    #+#             */
+/*   Updated: 2024/04/18 13:17:31 by nandreev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
+
+/*
+Functions:
+sort_2_a
+	sorts 2 values in stack a
+sort_3_a
+	sorts 3 values in stack a (hardcoded all possible combinations)
+sort_5
+	sorts 4 and 5 values using both stacks
+sort_all
+	sorts all possible number of values, but is not optimal for sorting 2-5 values
+main
+	parces given arguments ang calls sorting functions
+*/
 
 // to print stack
 
@@ -30,7 +56,7 @@
 // 	print_stack("b", b);
 //end to print stack
 
-void sort_2_a(t_stack **stack)
+void	sort_2_a(t_stack **stack)
 {
 	int	a;
 	int	b;
@@ -41,7 +67,7 @@ void sort_2_a(t_stack **stack)
 		sa(stack);
 }
 
-void sort_3_a(t_stack **stack)
+void	sort_3_a(t_stack **stack)
 {
 	int	a;
 	int	b;
@@ -61,7 +87,7 @@ void sort_3_a(t_stack **stack)
 		ra(stack);
 	else if ((a < b) && (a > c) && (b > c))
 		rra(stack);
-	else if ((a < b) && (b > c) &&(a < c))
+	else if ((a < b) && (b > c) && (a < c))
 	{
 		ra(stack);
 		sa(stack);
@@ -80,11 +106,10 @@ void	sort_5(t_stack **a)
 	while (b)
 	{
 		mark_smallest_and_biggest(a);
-		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value)
-			pa (a, &b);
-		else if ((b->value > (ft_lstlast(*a))->value) && (ft_lstlast(*a))->biggest == 1)
-			pa (a, &b);
-		else if ((b->value < (*a)->value) && (*a)->smallest == 1)
+		if ((b->value < (*a)->value && b->value > (ft_lstlast(*a))->value)
+			|| ((b->value > (ft_lstlast(*a))->value) 
+				&& (ft_lstlast(*a))->biggest == 1)
+			|| ((b->value < (*a)->value) && (*a)->smallest == 1))
 			pa (a, &b);
 		else
 		{

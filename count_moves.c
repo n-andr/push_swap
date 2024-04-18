@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count_moves.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/18 12:41:44 by nandreev          #+#    #+#             */
+/*   Updated: 2024/04/18 13:04:28 by nandreev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /*
@@ -18,9 +30,9 @@ count_moves:
 	count total moves for each value
 */
 
-t_stack *find_least_moves(t_stack *stack)
+t_stack	*find_least_moves(t_stack *stack)
 {
-	t_stack *b_tmp;
+	t_stack	*b_tmp;
 
 	b_tmp = stack;
 	while (stack)
@@ -29,7 +41,7 @@ t_stack *find_least_moves(t_stack *stack)
 			b_tmp = stack;
 		stack = stack->next;
 	}
-	return(b_tmp);
+	return (b_tmp);
 }
 
 void	zeroing_moves(t_stack *b)
