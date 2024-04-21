@@ -1,6 +1,6 @@
 # Push-Swap
 
-Push-Swap is a sorting algorithm project at [Your School/Institution], where the goal is to create a program that sorts a stack of integers using a limited set of instructions. The project challenges students to devise an efficient algorithm to sort the stack with the least number of operations possible.
+Push-Swap is a sorting algorithm project at 42 coding school, where the goal is to create a program that sorts a stack of integers using a limited set of instructions. The project challenges students to devise an efficient algorithm to sort the stack with the least number of operations possible.
 
 ## Overview
 
@@ -12,11 +12,13 @@ The Push-Swap project consists of two main programs:
 
 ## Performance
 
-3 numbers: max 3 moves.
-5 numbers: max 12 moves.
-100 numbers: average 582 moves.
-500 numbers: average 5163 moves.
+- 3 numbers: max 3 moves.
+- 5 numbers: max 12 moves.
+- 100 numbers: average 582 moves.
+- 500 numbers: average 5163 moves.
 
+## Solution
+(tbd)
 ## Instructions
 
 The push_swap and checker programs utilize the following set of instructions to manipulate the stacks:
