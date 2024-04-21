@@ -10,6 +10,13 @@ The Push-Swap project consists of two main programs:
 
 2. **checker**: This program verifies whether a sequence of operations provided by push_swap successfully sorts the list of integers. It reads the sequence of operations from standard input and applies them to the list, then checks if the list is sorted.
 
+## Performance
+
+3 numbers: max 3 moves.
+5 numbers: max 12 moves.
+100 numbers: average 582 moves.
+500 numbers: average 5163 moves.
+
 ## Instructions
 
 The push_swap and checker programs utilize the following set of instructions to manipulate the stacks:
