@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:52:21 by nandreev          #+#    #+#             */
-/*   Updated: 2024/04/18 13:22:25 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:54:54 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	rrr(t_stack **a, t_stack **b);
 void	move_smalest_top(t_stack **a);
 
 //sorting
+void	check_if_sorted(t_stack **a);
 void	sort_all(t_stack **a);
 void	mark_smallest_and_biggest(t_stack **stack);
 void	find_smallest(t_stack **stack);

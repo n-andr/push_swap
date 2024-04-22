@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:49:27 by nandreev          #+#    #+#             */
-/*   Updated: 2024/04/18 13:17:31 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:57:32 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,12 @@ void	sort_all(t_stack **a)
 	b = NULL;
 	extract_sorted_list(a, &b);
 	while (b)
-	{	
+	{
 		mark_smallest_and_biggest(a);
 		if (b->value < (*a)->value && b->value > (ft_lstlast(*a))->value)
 			pa (a, &b);
 		else if ((b->value > (ft_lstlast(*a))->value) 
-		&& (ft_lstlast(*a))->biggest == 1)
+			&& (ft_lstlast(*a))->biggest == 1)
 			pa (a, &b);
 		else if ((b->value < (*a)->value) && (*a)->smallest == 1)
 			pa (a, &b);
@@ -157,6 +157,7 @@ int	main(int argc, char **argv)
 
 	argc_check(argc);
 	a = fill_stack((argc), (argv));
+	check_if_sorted(&a);
 	if (ft_lstsize(a) == 2)
 		sort_2_a(&a);
 	else if (ft_lstsize(a) == 3)
@@ -167,4 +168,4 @@ int	main(int argc, char **argv)
 		sort_all(&a);
 	free_stack(a);
 	return (0);
-} 
+}

@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:53:17 by nandreev          #+#    #+#             */
-/*   Updated: 2024/04/18 12:53:20 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:04:18 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,34 @@
 
 /*
 Functions:
+check_if_sorted :
+	checks if given list is already sorted
 find_smallest :
 	finds and marks the smallest value in the given stak
 
 find_biggest :
 	finds and marks the biggest value in the given stack
 */
+
+void	check_if_sorted(t_stack **a)
+{
+	t_stack	*tmp;
+
+	tmp = (*a);
+	while (tmp != NULL)
+	{
+		if ((tmp->next != NULL && tmp->value < tmp->next->value) 
+			|| tmp->next == NULL)
+		{
+			tmp = tmp->next;
+		}
+		else
+			return ;
+	}
+	free_stack(*a);
+	exit (EXIT_FAILURE);
+}
+
 void	mark_smallest_and_biggest(t_stack **stack)
 {
 	find_smallest(stack);

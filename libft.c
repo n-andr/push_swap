@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:43:32 by nandreev          #+#    #+#             */
-/*   Updated: 2024/04/18 13:09:49 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:50:11 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,3 @@ void	*ft_calloc(size_t n_items, size_t size)
 	ft_bzero(mem, total_size);
 	return (mem);
 }
-
